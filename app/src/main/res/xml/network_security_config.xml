@@ -1,0 +1,6 @@
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">api.themoviedb.org</domain>
+        <domain includeSubdomains="true">13.225.103.26</domain>
+    </domain-config>
+</network-security-config>
