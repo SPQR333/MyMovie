@@ -18,7 +18,6 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.mymovie.Data.api.MovieApi
-import com.example.mymovie.Data.api.RetrofitClient
 import com.example.mymovie.Domain.adapters.MovieAdapter
 import com.example.mymovie.Domain.model.MovieModel
 import com.example.mymovie.MainViewModel
@@ -27,90 +26,65 @@ import com.example.mymovie.R
 import com.example.mymovie.databinding.FragmentMainBinding
 import com.example.mymovie.fragments.isPermissionGranted
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding
-    private lateinit var adapter: MovieAdapter
-    private val model: MovieViewModel by viewModels()
-    private lateinit var pLauncher: ActivityResultLauncher<String>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    @Inject
+    lateinit var movieApi: MovieApi
+    private lateinit var binding: FragmentMainBinding
+    private val model: MovieViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
         return binding.root
-    }
 
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, Fragment_Movie.newInstance())
-            .commit()
-            getPopularListMovie()
+
+
+        loadPopularMovies()
+
+
     }
 
-
-
-
-    private fun getPopularListMovie() {
-        viewLifecycleOwner.lifecycleScope.launch {
+    private fun loadPopularMovies() {
+        lifecycleScope.launch {
             try {
-                Log.d("API_REQUEST", "Отправка запроса...")
+                // Делаем запрос
+                val response = movieApi.getPopularPeople()
 
-                val response = RetrofitClient.apiService.getPopularMovies(
-                    apiKey = "6f6e8dc98c369b69a1cb7070ddd80765" // ваш ключ
-                )
-
-                Log.d("API_RESPONSE", "Успешный ответ: ${response.results} фильмов")
+                // Выводим результат в логи
+                Log.d("API_RESPONSE", "Успешный ответ: ${response.results.size} фильмов")
                 response.results.forEach { movie ->
-                    Log.d(
-                        "MOVIE_DATA", """
-                        Title: ${movie.title}
-                        Rating: ${movie.voteAverage}
-                        Poster: ${movie.posterPath}
-                        Release: ${movie.releaseDate}
-                        --------------------------
-                    """.trimIndent()
-                    )
+                    Log.d("MOVIE_DETAILS", """
+                        $response
+                        Название: ${movie.id}
+                        Рейтинг: ${movie.voteAverage}
+                        Постер: ${movie.posterPath ?: "нет"}
+                    """.trimIndent())
                 }
             } catch (e: Exception) {
-                Log.e("API_ERROR", "Ошибка запроса: ${e.message}")
+                // Обрабатываем ошибки
+                Log.e("API_ERROR", "Ошибка запроса", e)
             }
         }
-    }
-
-
-    private fun parseMovieData(response: String) {
-        val mainObject = JSONObject(response)
-    }
-
-    private fun updateMovieList(movie: MovieModel) {
-
-    }
-
-
+        }
 }
-
-
-
-
-
-
-
-
-
-
-

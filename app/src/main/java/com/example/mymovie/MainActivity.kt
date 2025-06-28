@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.mymovie.Presentation.MainFragment
 import com.example.mymovie.Presentation.NoSSLv3SocketFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +32,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     // Лог-тег для фильтрации сообщений
     private companion object {
