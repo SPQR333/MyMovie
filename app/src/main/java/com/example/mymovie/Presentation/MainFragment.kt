@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,8 +51,15 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+
         binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        childFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, Fragment_Movie())
+            .commit()
+
+
         return binding.root
 
 
@@ -69,7 +77,7 @@ class MainFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 // Делаем запрос
-                val response = movieApi.getPopularPeople()
+                val response = movieApi.getPopularMovie()
 
                 // Выводим результат в логи
                 Log.d("API_RESPONSE", "Успешный ответ: ${response.results.size} фильмов")
