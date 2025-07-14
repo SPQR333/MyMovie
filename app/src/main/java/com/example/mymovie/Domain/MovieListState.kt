@@ -1,11 +1,9 @@
 package com.example.mymovie.Domain
 
-import com.example.mymovie.Domain.model.Genre
-
 // presentation/model/MovieListState.kt
 data class MovieListState(
     val movies: List<MovieUi>,  // Фильмы с UI-специфичными полями
-    val genres: List<Genre>,
+    val genres: List<MovieItem.Genre>,
     val searchQuery: String,  // Текст из поиска
     val selectedGenreId: Int?  // ID выбранного жанра (null = все жанры)
 ) {

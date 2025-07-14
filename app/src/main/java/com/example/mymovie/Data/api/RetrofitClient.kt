@@ -1,5 +1,7 @@
 package com.example.mymovie.Data.api
 
+import com.example.mymovie.Data.repository.MovieRepositoryImpl
+import com.example.mymovie.Domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,16 +36,18 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): MovieApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient) // Подключаем кастомный OkHttpClient
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+            .create(MovieApi::class.java)
+
     }
 
     @Provides
-    fun provideMovieApi(retrofit: Retrofit): MovieApi {
-        return retrofit.create(MovieApi::class.java)
+    fun provideMovieRepository(api: MovieApi): MovieRepository {
+        return MovieRepositoryImpl(api)
     }
 }
