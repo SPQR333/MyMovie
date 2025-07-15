@@ -1,37 +1,15 @@
-package com.example.mymovie
+package com.example.mymovie.Presentation.screens
 
-import android.annotation.SuppressLint
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Request
-import com.android.volley.TimeoutError
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.mymovie.Presentation.MainFragment
-import com.example.mymovie.Presentation.NoSSLv3SocketFactory
+import com.example.mymovie.R
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.net.ConnectException
-import java.net.HttpURLConnection
-import java.net.InetAddress
-import java.net.MalformedURLException
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
-import javax.net.ssl.SSLContext
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     // Лог-тег для фильтрации сообщений

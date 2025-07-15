@@ -1,8 +1,7 @@
 package com.example.mymovie.Domain.repository
 
-import com.example.mymovie.Domain.MovieItem
-import com.example.mymovie.Domain.model.MovieModel
+import com.example.mymovie.Domain.model.Movie
 
 interface MovieRepository {
-    suspend fun getPopularMovies(): List<MovieModel>
+    suspend fun getPopularMovies(): List<Movie>
 }

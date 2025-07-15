@@ -1,6 +1,6 @@
 package com.example.mymovie.Data.model
 
-import com.example.mymovie.Domain.model.MovieModel
+import com.example.mymovie.Domain.model.Movie
 
 // data/model/ApiMovieResponse.kt
 data class ApiMovieResponse(
@@ -12,7 +12,7 @@ data class ApiMovieDto(
     val title: String,
     val poster_path: String?
 ) {
-    fun toMovieItem(): MovieModel = MovieModel(
+    fun toMovieItem(): Movie = Movie(
         id = id,
         title = title,
         poster = poster_path!!
