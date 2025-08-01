@@ -3,7 +3,12 @@ package com.example.mymovie.Presentation.viewModels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.mymovie.Data.api.MovieApi
+import com.example.mymovie.Data.remote.MovieMapper
+import com.example.mymovie.Data.remote.MoviePagingSource
 import com.example.mymovie.Domain.model.Movie
 import com.example.mymovie.Domain.usecase.GetListMovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val movieApi: MovieApi, // Инжектим Retrofit-сервис
-    private val getListMoviesUseCase: GetListMovieUseCase
+    private val movieApi: MovieApi,
+    private val mapper: MovieMapper,
 ) : ViewModel() {
 
     private val _movie = MutableStateFlow<List<Movie>>(emptyList())
@@ -26,18 +31,11 @@ class MovieViewModel @Inject constructor(
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
 
-
-
-    fun loadPopularMovie() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                _movie.value = getListMoviesUseCase()
-            } catch (e: Exception) {
-                Log.e("MovieFragment", "Error loading movie", e)
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
+    val movies = Pager(
+        config = PagingConfig(
+            pageSize = 20,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { MoviePagingSource(movieApi, mapper)}
+    ).flow.cachedIn(viewModelScope)
 }

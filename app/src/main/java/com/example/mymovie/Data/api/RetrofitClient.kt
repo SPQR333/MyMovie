@@ -1,5 +1,6 @@
 package com.example.mymovie.Data.api
 
+import com.example.mymovie.Data.remote.MovieMapper
 import com.example.mymovie.Data.repository.MovieRepositoryImpl
 import com.example.mymovie.Domain.repository.MovieRepository
 import dagger.Module
@@ -17,6 +18,9 @@ object NetworkModule {
 
     private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val AUTH_TOKEN = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZjZlOGRjOThjMzY5YjY5YTFjYjcwNzBkZGQ4MDc2NSIsIm5iZiI6MTc0NTQ0NjIxNS4xMzUsInN1YiI6IjY4MDk2NTQ3YjJiNzIyYWVkZjhhMmE1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CaeNCane7d3Mzo5mzd1Ic9mzJWQ3iJRD7J2z8DsF3eQ"
+
+    @Provides
+    fun provideMovieMapper(): MovieMapper = MovieMapper()
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {

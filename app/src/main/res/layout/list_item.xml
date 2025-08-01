@@ -26,10 +26,11 @@
 
         <ImageView
             android:id="@+id/imPoster"
+            android:layout_width="370dp"
+            android:layout_height="530dp"
+            android:layout_marginTop="29dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_width="144dp"
-            android:layout_height="153dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/tvMovieName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

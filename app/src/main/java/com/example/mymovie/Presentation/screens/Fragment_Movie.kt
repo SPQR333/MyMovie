@@ -16,6 +16,7 @@ import com.example.mymovie.Domain.model.Movie
 import com.example.mymovie.Presentation.viewModels.MovieViewModel
 import com.example.mymovie.databinding.FragmentMovieBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -39,35 +40,31 @@ class Fragment_Movie : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        observeMovieList()
-        modelMovie.loadPopularMovie()
+        observeMovies()
     }
 
     private fun setupRecyclerView() {
         adapter = MovieAdapter { movie ->
-            // Обработка клика по элементу
             showMovieDetails(movie)
         }
 
         binding.rcView.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = this@Fragment_Movie.adapter
-            setHasFixedSize(true) // Оптимизация для фиксированного размера элементов
+            setHasFixedSize(true)
         }
     }
-
-    private fun observeMovieList() {
-        viewLifecycleOwner.lifecycleScope.launch {
+    private fun observeMovies() {
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                modelMovie.movie.collect { movies ->
-                    adapter.submitList(movies)
+                modelMovie.movies.collectLatest { pagingData ->
+                    adapter.submitData(pagingData)
                 }
             }
         }
     }
 
     private fun showMovieDetails(movie: Movie) {
-
         Toast.makeText(requireContext(), "Selected: ${movie.title}", Toast.LENGTH_SHORT).show()
     }
 

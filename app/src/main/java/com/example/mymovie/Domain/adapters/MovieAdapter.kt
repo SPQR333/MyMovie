@@ -2,6 +2,7 @@ package com.example.mymovie.Domain.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.squareup.picasso.Picasso
 
 class MovieAdapter(
     private val onItemClick: (Movie) -> Unit = {}
-) : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
+) : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     inner class MovieViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -56,6 +57,7 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
+
 }

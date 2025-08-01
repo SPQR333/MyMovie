@@ -45,31 +45,5 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        loadPopularMovies()
-
-
     }
-
-    private fun loadPopularMovies() {
-        lifecycleScope.launch {
-            try {
-                // Делаем запрос
-                val response = movieApi.getPopularMovie()
-
-                // Выводим результат в логи
-                Log.d("API_RESPONSE", "Успешный ответ: ${response.results.size} фильмов")
-                response.results.forEach { movie ->
-                    Log.d("MOVIE_DETAILS", """
-                        $response
-                        Название: ${movie.id}
-                        Рейтинг: ${movie.voteAverage}
-                        Постер: ${movie.posterPath ?: "нет"}
-                    """.trimIndent())
-                }
-            } catch (e: Exception) {
-                // Обрабатываем ошибки
-                Log.e("API_ERROR", "Ошибка запроса", e)
-            }
-        }
-        }
 }
