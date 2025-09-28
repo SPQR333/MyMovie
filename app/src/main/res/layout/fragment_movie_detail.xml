@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Основная информация о фильме -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textSize="16sp"/>
+
+    <!-- Раздел оценки -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Оцените фильм"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- RatingBar -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"/>
+
+    <!-- Кнопки быстрой оценки -->
+    <LinearLayout
+        android:id="@+id/ratingButtonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Текущая оценка -->
+    <TextView
+        android:id="@+id/tvCurrentRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ваша оценка: 0/10"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Кнопка подтверждения -->
+    <Button
+        android:id="@+id/btnSubmitRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подтвердить оценку"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+</LinearLayout>
