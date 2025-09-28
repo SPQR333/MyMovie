@@ -1,6 +1,5 @@
 package com.example.mymovie.Data.api
 
-import com.example.mymovie.Domain.model.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MoviesResponse(
@@ -18,10 +17,10 @@ data class ApiMovie(
     @SerializedName("release_date") val releaseDate: String,
     val overview: String
 
-) {
+) /*{
     fun ApiMovie.toDomain(): Movie = Movie(
         id = this.id,
         title = this.title,
         poster = this.posterPath?.let { "https://image.tmdb.org/t/p/w500$it" } ?: "",
     )
-}
+}*/

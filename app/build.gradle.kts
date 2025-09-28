@@ -83,4 +83,11 @@ dependencies {
     // Paging
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.runtime.ktx)
+
+        //Glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler) // Для обработки аннотаций
+
+    // Опционально: интеграция с OkHttp
+    implementation(libs.glide.integration)
 }

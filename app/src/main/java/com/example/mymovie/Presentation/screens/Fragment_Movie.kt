@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymovie.Domain.adapters.MovieAdapter
 import com.example.mymovie.Domain.model.Movie
+import com.example.mymovie.Presentation.NoSSLv3SocketFactory
 import com.example.mymovie.Presentation.viewModels.MovieViewModel
 import com.example.mymovie.databinding.FragmentMovieBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +42,7 @@ class Fragment_Movie : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeMovies()
+        showDialog()
     }
 
     private fun setupRecyclerView() {
@@ -63,9 +65,14 @@ class Fragment_Movie : Fragment() {
             }
         }
     }
+    private fun showDialog() {
+        val dialog = MovieDetailsBottomFragment.newInstance() // или MovieDetailsBottomFragment()
+        dialog.show(parentFragmentManager, MovieDetailsBottomFragment.TAG)
+    }
 
     private fun showMovieDetails(movie: Movie) {
-        Toast.makeText(requireContext(), "Selected: ${movie.title}", Toast.LENGTH_SHORT).show()
+        val dialog = MovieDetailsBottomFragment.newInstance(movie) // передаем movie в диалог
+        dialog.show(parentFragmentManager, MovieDetailsBottomFragment.TAG)
     }
 
     override fun onDestroyView() {
