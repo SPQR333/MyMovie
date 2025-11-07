@@ -1,4 +1,4 @@
-package com.example.mymovie.Domain
+package com.example.mymovie.domain
 
 data class MovieUiState(
     val header: MovieHeader,  // Верхний блок (постер, название, рейтинг)

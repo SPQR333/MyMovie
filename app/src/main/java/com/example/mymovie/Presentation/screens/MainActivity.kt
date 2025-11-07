@@ -1,19 +1,23 @@
-package com.example.mymovie.Presentation.screens
+package com.example.mymovie.presentation.screens
 
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.mymovie.R
+import com.example.mymovie.presentation.viewModels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val sharedViewModel: SharedViewModel by viewModels()
+
     // Лог-тег для фильтрации сообщений
     private companion object {
         const val TAG = "MovieApi"

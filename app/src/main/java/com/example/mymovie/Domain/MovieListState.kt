@@ -1,4 +1,4 @@
-package com.example.mymovie.Domain
+package com.example.mymovie.domain
 
 // presentation/model/MovieListState.kt
 data class MovieListState(

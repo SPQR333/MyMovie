@@ -1,4 +1,4 @@
-package com.example.mymovie.Domain.model
+package com.example.mymovie.domain.model
 
 import android.annotation.SuppressLint
 import android.os.Parcel
@@ -8,8 +8,9 @@ import android.os.Parcelable
 @SuppressLint("ParcelCreator")
 data class Movie(
     val id: Int,
-    val title :String,
-    val poster: String
+    val title: String,
+    val poster: String,
+    val overview: String
 ) : Parcelable {
     override fun describeContents(): Int {
         TODO("Not yet implemented")

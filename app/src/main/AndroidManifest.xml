@@ -22,7 +22,7 @@
         android:theme="@style/Theme.MyMovie"
         tools:targetApi="31">
         <activity
-            android:name=".Presentation.screens.MainActivity"
+            android:name=".presentation.screens.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,6 @@
-package com.example.mymovie.Data.api
+package com.example.mymovie.data.api
 
+import com.example.mymovie.data.model.ApiMovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -9,7 +10,7 @@ interface MovieApi {
     @GET("trending/movie/day")
     suspend fun getPopularMovie(
         @Query("api_key") apiKey: String = "6f6e8dc98c369b69a1cb7070ddd80765",
-        @Query("language") language: String = "en-US",
+        @Query("language") language: String = "ru-RU",
         @Query("page") page: Int = 1,
 
 
@@ -21,4 +22,13 @@ interface MovieApi {
         @Query("language") language: String = "en-US",
 
     ): MoviesResponse
+
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1,
+        @Query("language") language: String = "ru-RU",
+
+    ): MoviesResponse
 }
+

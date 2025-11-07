@@ -1,4 +1,4 @@
-package com.example.mymovie.Data.api
+package com.example.mymovie.data.api
 
 import com.google.gson.annotations.SerializedName
 
@@ -15,7 +15,7 @@ data class ApiMovie(
     @SerializedName("poster_path") val  posterPath: String?,
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("release_date") val releaseDate: String,
-    val overview: String
+    @SerializedName("overview") val  overview: String
 
 ) /*{
     fun ApiMovie.toDomain(): Movie = Movie(

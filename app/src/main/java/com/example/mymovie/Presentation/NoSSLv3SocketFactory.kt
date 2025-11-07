@@ -1,4 +1,4 @@
-package com.example.mymovie.Presentation
+package com.example.mymovie.presentation
 
 import java.net.InetAddress
 import java.net.Socket

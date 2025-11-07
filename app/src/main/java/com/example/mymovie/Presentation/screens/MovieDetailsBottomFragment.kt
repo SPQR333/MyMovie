@@ -1,12 +1,12 @@
-package com.example.mymovie.Presentation.screens
+package com.example.mymovie.presentation.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.mymovie.Domain.model.Movie
-import com.example.mymovie.Presentation.viewModels.MovieViewModel
+import com.example.mymovie.domain.model.Movie
+import com.example.mymovie.presentation.viewModels.MovieViewModel
 import com.example.mymovie.databinding.FragmentMovieDetailBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,10 +46,20 @@ class MovieDetailsBottomFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textView
-        binding.ratingBar
+        val movie = arguments?.getParcelable<Movie>("movie")
+        setupUI(movie!!)
+
+        binding.descriptionMovie
+       binding.ratingBar
+
 
 
 
     }
+    private fun setupUI(movie: Movie) {
+        with(binding) {
+            descriptionMovie.text = movie.overview
+
+        }
 }
+    }

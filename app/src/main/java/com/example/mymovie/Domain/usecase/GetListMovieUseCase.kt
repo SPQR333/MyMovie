@@ -1,7 +1,7 @@
-package com.example.mymovie.Domain.usecase
+package com.example.mymovie.domain.usecase
 
-import com.example.mymovie.Domain.model.Movie
-import com.example.mymovie.Domain.repository.MovieRepository
+import com.example.mymovie.domain.model.Movie
+import com.example.mymovie.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class GetListMovieUseCase @Inject constructor(

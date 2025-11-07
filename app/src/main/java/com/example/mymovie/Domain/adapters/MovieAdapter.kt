@@ -1,4 +1,4 @@
-package com.example.mymovie.Domain.adapters
+package com.example.mymovie.domain.adapters
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.example.mymovie.Domain.model.Movie
+import com.example.mymovie.domain.model.Movie
 import com.example.mymovie.R
 import com.example.mymovie.databinding.ListItemBinding
 import com.squareup.picasso.Callback
@@ -51,6 +51,7 @@ class MovieAdapter(
             with(binding) {
                 tvMovieName.text = item.title
 
+
                 val imageUrl = if (item.poster.startsWith("http")) {
                     item.poster
                 } else {
@@ -65,6 +66,7 @@ class MovieAdapter(
                     .placeholder(R.drawable.searchview_bg)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imPoster)
+
             }
         }
 

@@ -1,14 +1,13 @@
-package com.example.mymovie.Data.api
+package com.example.mymovie.data.api
 
-import com.example.mymovie.Data.remote.MovieMapper
-import com.example.mymovie.Data.repository.MovieRepositoryImpl
-import com.example.mymovie.Domain.repository.MovieRepository
+import com.example.mymovie.data.mapper.MovieMapper
+import com.example.mymovie.data.repository.MovieRepositoryImpl
+import com.example.mymovie.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
-import okhttp3.Dispatcher
 import okhttp3.Dns
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -76,7 +75,6 @@ object NetworkModule {
             .build()
             .create(MovieApi::class.java)
     }
-
     @Provides
     fun provideMovieRepository(api: MovieApi): MovieRepository {
         return MovieRepositoryImpl(
