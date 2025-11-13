@@ -1,6 +1,7 @@
 package com.example.mymovie.presentation.viewModels
 
-import androidx.lifecycle.Lifecycle
+import android.content.Context
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -11,17 +12,37 @@ import com.example.mymovie.data.mapper.MovieMapper
 import com.example.mymovie.data.remote.MoviePagingSource
 import com.example.mymovie.data.remote.SearchPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val movieApi: MovieApi,
     private val mapper: MovieMapper,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
+
+    private val sharedPreferences = context.getSharedPreferences("movie_ratings", Context.MODE_PRIVATE)
+
+    fun saveRating(movieId: Int, rating: Int) {
+        sharedPreferences.edit()
+            .putInt("rating_$movieId", rating)
+            .apply()
+    }
+
+    fun getRating(movieId: Int): Int {
+        return sharedPreferences.getInt("rating_$movieId", 0)
+    }
 
 
     // Текущая работающая реализация
@@ -33,9 +54,8 @@ class MovieViewModel @Inject constructor(
         pagingSourceFactory = { MoviePagingSource(movieApi, mapper) }
     ).flow.cachedIn(viewModelScope)
 
-    // ДОБАВИМ поиск рядом с существующим кодом
+    // Поиск
     private val _searchQuery = MutableStateFlow("")
-
     val movies = _searchQuery
         .debounce(500)
         .flatMapLatest { query ->
@@ -49,6 +69,8 @@ class MovieViewModel @Inject constructor(
                 ).flow.cachedIn(viewModelScope)
             }
         }
+
+
 
     fun setSearchQuery(query: String) {
         _searchQuery.value = query
