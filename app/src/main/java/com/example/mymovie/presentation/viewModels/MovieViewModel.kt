@@ -11,38 +11,70 @@ import com.example.mymovie.data.api.MovieApi
 import com.example.mymovie.data.mapper.MovieMapper
 import com.example.mymovie.data.remote.MoviePagingSource
 import com.example.mymovie.data.remote.SearchPagingSource
+import com.example.mymovie.domain.model.Movie
+import com.example.mymovie.domain.repository.RatingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val movieApi: MovieApi,
     private val mapper: MovieMapper,
+    private val ratingRepository: RatingRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
+    private val _ratingFlow = MutableStateFlow(0)
+    val ratingFlow: StateFlow<Int> = _ratingFlow.asStateFlow()
 
-    private val sharedPreferences = context.getSharedPreferences("movie_ratings", Context.MODE_PRIVATE)
 
     fun saveRating(movieId: Int, rating: Int) {
+        viewModelScope.launch {
+            ratingRepository.saveRating(movieId, rating)
+            _ratingFlow.value = rating
+        }
+    }
+
+
+    fun loadRatingForMovie(movieId: Int) {
+        viewModelScope.launch {
+            val rating = ratingRepository.getRating(movieId)
+            _ratingFlow.value = rating
+        }
+    }
+    /*suspend fun getMovieRating(movieId: Int): Int {
+        return ratingRepository.getRating(movieId)
+    }*/
+
+
+  //  private val sharedPreferences = context.getSharedPreferences("movie_ratings", Context.MODE_PRIVATE)
+
+   /* fun saveRating(movieId: Int, rating: Int) {
         sharedPreferences.edit()
             .putInt("rating_$movieId", rating)
             .apply()
-    }
+    }*/
 
-    fun getRating(movieId: Int): Int {
+   /* fun getRating(movieId: Int): Int {
         return sharedPreferences.getInt("rating_$movieId", 0)
-    }
+    }*/
 
 
     // Текущая работающая реализация

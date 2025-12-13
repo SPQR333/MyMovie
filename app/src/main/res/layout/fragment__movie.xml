@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#45AEE0"
-    tools:context=".Presentation.screens.Fragment_Movie">
+    tools:context=".presentation.screens.Fragment_Movie">
 
     <!-- TODO: Update blank fragment layout -->
 
