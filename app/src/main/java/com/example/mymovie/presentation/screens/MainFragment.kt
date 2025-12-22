@@ -29,8 +29,6 @@ class MainFragment : Fragment() {
     lateinit var movieApi: MovieApi
     private lateinit var binding: FragmentMainBinding
 
-    // Уберите эту строку, т.к. MovieViewModel теперь в дочернем фрагменте
-    // private val model: MovieViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +46,7 @@ class MainFragment : Fragment() {
         setupFragment()
     }
 
-    // НОВЫЙ МЕТОД: Настройка SearchView
+    //  Настройка SearchView
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -72,7 +70,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    // НОВЫЙ МЕТОД: Скрытие клавиатуры
+    // Скрытие клавиатуры
     private fun hideKeyboard() {
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.searchView.windowToken, 0)

@@ -59,22 +59,6 @@ class MovieViewModel @Inject constructor(
             _ratingFlow.value = rating
         }
     }
-    /*suspend fun getMovieRating(movieId: Int): Int {
-        return ratingRepository.getRating(movieId)
-    }*/
-
-
-  //  private val sharedPreferences = context.getSharedPreferences("movie_ratings", Context.MODE_PRIVATE)
-
-   /* fun saveRating(movieId: Int, rating: Int) {
-        sharedPreferences.edit()
-            .putInt("rating_$movieId", rating)
-            .apply()
-    }*/
-
-   /* fun getRating(movieId: Int): Int {
-        return sharedPreferences.getInt("rating_$movieId", 0)
-    }*/
 
 
     // Текущая работающая реализация

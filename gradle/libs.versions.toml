@@ -24,6 +24,8 @@ coreKtx = "1.12.0"  # было 1.16.0 (1.16.0 еще не выпущена)
 appcompat = "1.7.0"  # было 1.7.0
 material = "1.12.0"  # было 1.12.0
 activity = "1.10.1"   # было 1.10.1
+room = "2.6.1"
+
 
 
 
@@ -32,7 +34,11 @@ activity = "1.10.1"   # было 1.10.1
 
 
 [libraries]
-
+# Room компоненты
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
@@ -61,6 +67,8 @@ volley = { module = "com.android.volley:volley", version.ref = "volley" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation"}
 easypermissions = { group = "pub.devrel", name = "easypermissions", version.ref = "easyPermissions"}
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+sqlcipher = "net.zetetic:android-database-sqlcipher:4.5.6"  # Шифрование БД
+sqldelight = "app.cash.sqldelight:android-driver:2.1.2"     # Альтернатива Room
 
 
 [plugins]
@@ -68,5 +76,5 @@ navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 
