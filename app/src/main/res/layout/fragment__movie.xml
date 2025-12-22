@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.Fragment_Movie">
+    android:background="#45AEE0"
+    tools:context=".presentation.screens.Fragment_Movie">
 
     <!-- TODO: Update blank fragment layout -->
 

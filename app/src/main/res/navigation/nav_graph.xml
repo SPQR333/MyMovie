@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_Movie2">
+
+    <fragment
+        android:id="@+id/fragment_Movie2"
+        android:name="com.example.mymovie.presentation.screens.Fragment_Movie"
+        android:label="Fragment_Movie" />
+    <fragment
+        android:id="@+id/movieDetailsBottomFragment"
+        android:name="com.example.mymovie.presentation.screens.MovieDetailsBottomFragment"
+        android:label="MovieDetailsBottomFragment" >
+        <action
+            android:id="@+id/action_movieDetailsBottomFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mymovie.presentation.screens.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_myListFilmFragment"
+            app:destination="@id/myListFilmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myListFilmFragment"
+        android:name="com.example.mymovie.presentation.screens.MyListFilmFragment"
+        android:label="fragment_my_list_film"
+        tools:layout="@layout/fragment_my_list_film" />
+</navigation>

@@ -4,28 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9B1D1D">
+    android:background="#48A1E7">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#944242">
+        android:background="#5DA9CA">
 
         <TextView
             android:id="@+id/tvMovieName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="544dp"
+            android:layout_marginBottom="84dp"
             android:text="TextView"
+            android:textColorLink="#3F51B5"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/imPoster"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imPoster"
-            android:layout_width="144dp"
-            android:layout_height="153dp"
+            android:layout_width="370dp"
+            android:layout_height="530dp"
+            android:layout_marginTop="29dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/tvMovieName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

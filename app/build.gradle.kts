@@ -2,6 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
+
+
     kotlin("kapt")
 }
 
@@ -16,7 +19,20 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+
+        // Room конфигурация
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments.putAll(
+                    mapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true",
+                        "room.expandProjection" to "true"
+                    )
+                )
+            }
+        }
+        }
 
     buildTypes {
         release {
@@ -43,10 +59,20 @@ android {
 }
 
 dependencies {
+    // Room Database
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)  // annotation processor для Room
+    // Для миграций (опционально)
+   // implementation("androidx.room:room-migration:2.8.4")
+
+    // Для тестирования Room
+    testImplementation("androidx.room:room-testing:2.8.4")
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
 
     // Network
     implementation(libs.retrofit)
@@ -78,4 +104,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.runtime.ktx)
+
+        //Glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler) // Для обработки аннотаций
+
+    // Опционально: интеграция с OkHttp
+    implementation(libs.glide.integration)
 }
